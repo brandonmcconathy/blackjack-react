@@ -9,7 +9,7 @@ export default function Home() {
 
   if (stage == 'home') {
     return(
-      <main className="text-center">
+      <main className="flex justify-center items-center text-center">
         <h1>Blackjack</h1>
         <Bet />
       </main>
