@@ -5,14 +5,20 @@ import Bet from "./components/bet"
 
 export default function Home() {
 
-  const [stage, setStage] = useState('home')
+  const [stage, setStage] = useState('bet')
 
-  if (stage == 'home') {
+  if (stage == 'bet') {
     return(
       <main className="flex justify-center items-center text-center">
         <h1>Blackjack</h1>
         <Bet />
       </main>
+    )
+  }
+
+  if (stage == 'play') {
+    return(
+      <h1>Play game</h1>
     )
   }
 
