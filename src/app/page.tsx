@@ -18,7 +18,16 @@ export default function Home() {
 
   if (stage == 'play') {
     return(
-      <h1>Play game</h1>
+      <>
+        <h1>Dealer</h1>
+        <div>
+          <h2>Dealer Cards</h2>
+        </div>
+        <div>
+          <h2>Player Cards</h2>
+        </div>
+        <h1>Player</h1>
+      </>
     )
   }
 
