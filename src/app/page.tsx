@@ -33,7 +33,11 @@ export default function Home() {
 
   if (stage == 'again') {
     return(
-      <h1>Play again?</h1>
+      <>
+        <h1>Play again?</h1>
+        <button>Yes</button>
+        <button>No</button>
+      </>
     )
   }
 
