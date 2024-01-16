@@ -35,8 +35,10 @@ export default function Home() {
     return(
       <>
         <h1>Play again?</h1>
-        <button>Yes</button>
-        <button>No</button>
+        <div>
+          <button>Yes</button>
+          <button>No</button>
+        </div>
       </>
     )
   }
