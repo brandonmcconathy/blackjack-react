@@ -7,6 +7,15 @@ export default function Home() {
 
   const [stage, setStage] = useState('bet')
 
+  if (stage == 'start') {
+    return(
+      <main>
+        <h1>Blackjack</h1>
+        <button>Start game</button>
+      </main>
+    )
+  }
+
   if (stage == 'bet') {
     return(
       <main className="flex justify-center items-center text-center">
