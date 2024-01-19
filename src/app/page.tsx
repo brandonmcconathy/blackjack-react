@@ -5,13 +5,13 @@ import Bet from "./components/bet"
 
 export default function Home() {
 
-  const [stage, setStage] = useState('bet')
+  const [stage, setStage] = useState('start')
 
   if (stage == 'start') {
     return(
-      <main>
-        <h1>Blackjack</h1>
-        <button>Start game</button>
+      <main className="text-center mt-10">
+        <h1 className="text-5xl mb-16">Blackjack</h1>
+        <button onClick={function() {setStage('bet')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Start Game</button>
       </main>
     )
   }
