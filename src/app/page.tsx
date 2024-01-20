@@ -27,7 +27,7 @@ export default function Home() {
 
   if (stage == 'play') {
     return(
-      <>
+      <main className="flex flex-col gap-5 justify-center items-center text-center mt-16">
         <h1>Dealer</h1>
         <div>
           <h2>Dealer Cards</h2>
@@ -36,7 +36,7 @@ export default function Home() {
           <h2>Player Cards</h2>
         </div>
         <h1>Player</h1>
-      </>
+      </main>
     )
   }
 
