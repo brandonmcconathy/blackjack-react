@@ -19,9 +19,9 @@ export default function Bet() {
     }
 
     return(
-        <div>
-            <h1>Place your bet:</h1>
-            <h2>{bet}</h2>
+        <>
+            <h1 className="text-2xl font-semibold">Place your bet:</h1>
+            <h2 className="text-xl">{bet}</h2>
             <div className="flex flex-col justify-center items-center text-center gap-5">
                 <div className="flex justify-center items-center gap-5">
                     <button name='positive' value='1' className="bg-amber-200 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet}>1</button>
@@ -36,6 +36,6 @@ export default function Bet() {
                     <button name='negative' value='25' className="bg-amber-200 w-16 text-black rounded-full p-5 box-pop" onClick={handleBet}>-25</button>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
