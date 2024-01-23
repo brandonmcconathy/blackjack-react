@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Bet from "./components/bet"
+import CardDisplay from "./components/carddisplay"
 
 export default function Home() {
 
@@ -29,12 +30,8 @@ export default function Home() {
     return(
       <main className="flex flex-col justify-evenly text-center h-screen">
         <h1>Dealer</h1>
-        <div>
-          <h2>Dealer Cards</h2>
-        </div>
-        <div>
-          <h2>Player Cards</h2>
-        </div>
+        <CardDisplay cards={['A', 'Q']} />
+        <CardDisplay cards={['10', '4']} />
         <h1>Player</h1>
       </main>
     )
