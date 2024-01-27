@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Bet from "./components/bet"
 import CardDisplay from "./components/carddisplay"
+import Play from "./components/play"
 
 export default function Home() {
 
@@ -28,12 +29,7 @@ export default function Home() {
 
   if (stage == 'play') {
     return(
-      <main className="flex flex-col justify-evenly text-center h-screen">
-        <h1>Dealer</h1>
-        <CardDisplay cards={['A', 'Q']} />
-        <CardDisplay cards={['10', '4']} />
-        <h1>Player</h1>
-      </main>
+      <Play />
     )
   }
 
