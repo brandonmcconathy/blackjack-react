@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import Bet from "./components/bet"
-import CardDisplay from "./components/carddisplay"
 import Play from "./components/play"
+import PlayAgain from "./components/playagain"
 
 export default function Home() {
 
@@ -35,13 +35,7 @@ export default function Home() {
 
   if (stage == 'again') {
     return(
-      <>
-        <h1>Play again?</h1>
-        <div>
-          <button>Yes</button>
-          <button>No</button>
-        </div>
-      </>
+      <PlayAgain />
     )
   }
 
