@@ -1,9 +1,12 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { StageContext } from "../../../lib/stagecontext"
 
 export default function Bet() {
 
+    const context:any = useContext(StageContext)
+    const { setStage } = context
     const [bet, setBet] = useState(0)
 
     const handleBet = (event:any) => {
@@ -19,7 +22,7 @@ export default function Bet() {
     }
 
     return(
-        <>
+        <main className="flex flex-col gap-5 justify-center items-center text-center mt-16">
             <h1 className="text-2xl font-semibold">Place your bet:</h1>
             <h2 className="text-xl">{bet}</h2>
             <div className="flex flex-col justify-center items-center text-center gap-5">
@@ -36,6 +39,7 @@ export default function Bet() {
                     <button name='negative' value='25' className="bg-amber-200 w-16 text-black rounded-full p-5 box-pop" onClick={handleBet}>-25</button>
                 </div>
             </div>
-        </>
+            <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button>
+        </main>
     )
 }

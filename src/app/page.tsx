@@ -21,10 +21,7 @@ export default function Home() {
 
   if (stage == 'bet') {
     return(
-      <main className="flex flex-col gap-5 justify-center items-center text-center mt-16">
-        <Bet />
-        <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button>
-      </main>
+      <Bet />
     )
   }
 
