@@ -1,13 +1,16 @@
 'use client'
 
-import { useState } from "react"
+import { useContext } from "react"
+import { StageContext } from "../../lib/stagecontext"
 import Bet from "./components/bet"
 import Play from "./components/play"
 import PlayAgain from "./components/playagain"
 
 export default function Home() {
 
-  const [stage, setStage] = useState('again')
+  const context:any = useContext(StageContext)
+  const {stage, setStage} = context
+  console.log(stage)
 
   if (stage == 'start') {
     return(
