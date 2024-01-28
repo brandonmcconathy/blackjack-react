@@ -2,4 +2,4 @@
 
 import { createContext } from 'react'
 
-export const StageContext = createContext(null)
+export const StageContext = createContext({})
