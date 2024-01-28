@@ -7,7 +7,7 @@ import PlayAgain from "./components/playagain"
 
 export default function Home() {
 
-  const [stage, setStage] = useState('start')
+  const [stage, setStage] = useState('again')
 
   if (stage == 'start') {
     return(
