@@ -5,7 +5,7 @@ import { StageContext } from "../../lib/stagecontext"
 
 export function Providers({ children }:any) {
 
-  const [ stage, setStage ] = useState('again')
+  const [ stage, setStage ] = useState('start')
   
   return(
     <StageContext.Provider value={{stage, setStage}}>{children}</StageContext.Provider>

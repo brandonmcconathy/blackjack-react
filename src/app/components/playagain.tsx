@@ -6,8 +6,7 @@ import { StageContext } from "../../../lib/stagecontext"
 export default function PlayAgain() {
 
   const context:any = useContext(StageContext)
-  const {stage, setStage} = context
-  console.log(stage)
+  const { setStage } = context
 
   return(
     <main className="flex flex-col gap-10 justify-center items-center text-center mt-16">
