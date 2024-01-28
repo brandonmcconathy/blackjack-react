@@ -10,40 +10,16 @@ import PlayAgain from "./components/playagain"
 export default function Home() {
 
   const context:any = useContext(StageContext)
-  const {stage, setStage} = context
-  console.log(stage)
+  const { stage } = context
 
-  if (stage == 'start') {
-    return(
-      <Start />
-    )
-  }
-
-  if (stage == 'bet') {
-    return(
-      <Bet />
-    )
-  }
-
-  if (stage == 'play') {
-    return(
-      <Play />
-    )
-  }
-
-  if (stage == 'again') {
-    return(
-      <PlayAgain />
-    )
-  }
-
-  return (
-    <main className="text-center">
-      <h1>Blackjack</h1>
-      <section>
-        <h2>{stage}</h2>
-      </section>
-      <Bet />
-    </main>
-  )
+  switch(stage) {
+    case 'start':
+      return(<Start />)
+    case 'bet':
+      return(<Bet />)
+    case 'play':
+      return(<Play />)
+    case 'again':
+      return(<PlayAgain />)
+  } 
 }
