@@ -5,7 +5,7 @@ import { StageContext } from "../../../lib/stagecontext"
 
 export default function PlayAgain() {
 
-  const context = useContext(StageContext)
+  const context:any = useContext(StageContext)
   const stage:string = context.stage
   const setStage = context.setStage
   console.log(stage)
