@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { StageContext } from "../../../lib/stagecontext"
+import { StageContext } from "../../../lib/context"
 
 export default function Bet() {
 

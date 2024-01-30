@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext } from "react"
-import { StageContext } from "../../lib/stagecontext"
+import { StageContext } from "../../lib/context"
 import Start from "./components/start"
 import Bet from "./components/bet"
 import Play from "./components/play"
