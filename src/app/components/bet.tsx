@@ -1,18 +1,20 @@
 import { useState, useContext } from "react"
 import { StageContext } from "../../../lib/context"
+import { BetContext } from "../../../lib/context"
 
 export default function Bet() {
 
-    const context:any = useContext(StageContext)
-    const { setStage } = context
-    const [bet, setBet] = useState(0)
+    const contextStage:any = useContext(StageContext)
+    const contextBet:any = useContext(BetContext)
+    const { setStage } = contextStage
+    const { bet, setBet } = contextBet
 
     const handleBet = (event:any) => {
         const value = Number(event.target.value)
         if (event.target.name == 'positive') {
-            setBet((prevBet) => prevBet + value)
+            setBet((prevBet:any) => prevBet + value)
         } else {
-            setBet((prevBet) => prevBet - value)
+            setBet((prevBet:any) => prevBet - value)
             if (bet < value) {
                 setBet(0)
             }
