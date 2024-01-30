@@ -9,14 +9,18 @@ export default function Bet() {
     const { setStage } = contextStage
     const { bet, setBet } = contextBet
 
+    const [validBet, setValidBet] = useState(false)
+
     const handleBet = (event:any) => {
         const value = Number(event.target.value)
         if (event.target.name == 'positive') {
             setBet((prevBet:any) => prevBet + value)
+            setValidBet(true)
         } else {
             setBet((prevBet:any) => prevBet - value)
-            if (bet < value) {
+            if (bet <= value) {
                 setBet(0)
+                setValidBet(false)
             }
         }
     }
@@ -39,7 +43,10 @@ export default function Bet() {
                     <button name='negative' value='25' className="bg-amber-200 w-16 text-black rounded-full p-5 box-pop" onClick={handleBet}>-25</button>
                 </div>
             </div>
-            <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button>
+            {validBet ? 
+            <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button> :
+            <button onClick={function() {setStage('play')}} className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Place Bet</button>
+            }
         </main>
     )
 }
