@@ -10,6 +10,10 @@ export function Providers({ children }:any) {
   const [ bet, setBet ] = useState(0)
   
   return(
-    <StageContext.Provider value={{stage, setStage}}>{children}</StageContext.Provider>
+    <StageContext.Provider value={{stage, setStage}}>
+      <BetContext.Provider value={{bet, setBet}}>
+        {children}
+      </BetContext.Provider>
+    </StageContext.Provider>
   )
 }
