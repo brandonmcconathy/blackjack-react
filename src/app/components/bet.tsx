@@ -45,7 +45,7 @@ export default function Bet() {
             </div>
             {validBet ? 
             <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button> :
-            <button onClick={function() {setStage('play')}} className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Place Bet</button>
+            <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Place Bet</button>
             }
         </main>
     )
