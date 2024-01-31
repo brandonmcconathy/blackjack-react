@@ -1,13 +1,16 @@
 import { useState, useContext } from "react"
 import { StageContext } from "../../../lib/context"
 import { BetContext } from "../../../lib/context"
+import { BalanceContext } from "../../../lib/context"
 
 export default function Bet() {
 
     const contextStage:any = useContext(StageContext)
     const contextBet:any = useContext(BetContext)
+    const contextBalance:any = useContext(BalanceContext)
     const { setStage } = contextStage
     const { bet, setBet } = contextBet
+    const { balance, setBalance } = contextBalance
 
     const [validBet, setValidBet] = useState(false)
 
@@ -47,6 +50,7 @@ export default function Bet() {
             <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button> :
             <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Place Bet</button>
             }
+            <h1>{balance}</h1>
         </main>
     )
 }
