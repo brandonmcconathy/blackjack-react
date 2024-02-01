@@ -1,7 +1,5 @@
 import { useState, useContext } from "react"
-import { StageContext } from "../../../lib/context"
-import { BetContext } from "../../../lib/context"
-import { BalanceContext } from "../../../lib/context"
+import { StageContext, BetContext, BalanceContext } from "../../../lib/context"
 
 export default function Bet() {
 
@@ -28,6 +26,11 @@ export default function Bet() {
         }
     }
 
+    const placeBet = () => {
+        setBalance((prevBalence:number) => prevBalence - bet)
+        setStage('play')
+    }
+
     return(
         <main className="flex flex-col gap-5 justify-center items-center text-center mt-16">
             <h1 className="text-2xl font-semibold">Place your bet:</h1>
@@ -47,7 +50,7 @@ export default function Bet() {
                 </div>
             </div>
             {validBet ? 
-            <button onClick={function() {setStage('play')}} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button> :
+            <button onClick={placeBet} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Place Bet</button> :
             <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Place Bet</button>
             }
             <h1>{balance}</h1>
