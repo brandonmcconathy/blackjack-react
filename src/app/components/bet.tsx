@@ -12,14 +12,12 @@ export default function Bet() {
 
     const [validBet, setValidBet] = useState(false)
 
-    
-
     const placeBet = () => {
-        setBalance((prevBalence:any) => prevBalence - bet)
+        setBalance((prevBalence:number) => prevBalence - bet)
         setStage('play')
     }
 
-    const betValues = {positive: ['1','5','10','25'], negative: ['-1','-5','-10','-25']}
+    const betValues = {positive: [1,5,10,25], negative: [-1,-5,-10,-25]}
 
     return(
         <main className="flex flex-col gap-5 justify-center items-center text-center mt-16">
@@ -27,10 +25,10 @@ export default function Bet() {
             <h2 className="text-xl">{bet}</h2>
             <div className="flex flex-col justify-center items-center text-center gap-5">
                 <div className="flex justify-center items-center gap-5">
-                    {betValues.positive.map((value) => <BetButton value={Number(value)} name='positive' setValidBet={setValidBet} bet={bet} setBet={setBet} balance={balance} key={value} />)}
+                    {betValues.positive.map((value) => <BetButton value={value} name='positive' setValidBet={setValidBet} bet={bet} setBet={setBet} balance={balance} key={value} />)}
                 </div>
                 <div className="flex justify-center items-center gap-5">
-                    {betValues.negative.map((value) => <BetButton value={Number(value)} name='negative' setValidBet={setValidBet} bet={bet} setBet={setBet} balance={balance} key={value} />)}
+                    {betValues.negative.map((value) => <BetButton value={value} name='negative' setValidBet={setValidBet} bet={bet} setBet={setBet} balance={balance} key={value} />)}
                 </div>
             </div>
             {validBet ? 
