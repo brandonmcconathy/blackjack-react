@@ -56,7 +56,13 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
                 } else {
                     setValid(true)
                 }
-            }  
+            } else {
+                if (bet < (value * -1)) {
+                    setValid(false)
+                } else {
+                    setValid(true)
+                }
+            }
         }
         checkValid()
     },[bet])
@@ -67,7 +73,7 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
             setValidBet(true)
         } else {
             setBet((prevBet:any) => prevBet + value)
-            if (bet <= value) {
+            if (bet + value <= 0) {
                 setBet(0)
                 setValidBet(false)
             }
