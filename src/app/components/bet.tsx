@@ -83,7 +83,7 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
     return(
         <>
         {valid ? 
-            <button name={name} value={value} className="bg-amber-200 text-xl w-24 h-24 text-black rounded-full py-5 px-7 box-pop text-center" onClick={handleBet}>{value}</button> :
+            <button name={name} value={value} className="bg-amber-200 text-xl w-24 h-24 text-black rounded-full py-5 px-7 box-pop text-center hover:bg-amber-400 transition duration-500" onClick={handleBet}>{value}</button> :
             <button name={name} value={value} className="bg-gray-500 text-xl w-24 h-24 text-black rounded-full py-5 px-7 box-pop text-center" onClick={handleBet} disabled>{value}</button>}
         </>
     )
