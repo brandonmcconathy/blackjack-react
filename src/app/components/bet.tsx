@@ -70,13 +70,11 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
         }  
     }
 
-    checkValid()
-
     return(
         <>
         {valid ? 
             <button name={name} value={value} className="bg-amber-200 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet}>{value}</button> :
-            <button name={name} value={value} className="bg-gray-500 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet}>{value}</button>}
+            <button name={name} value={value} className="bg-gray-500 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet} disabled>{value}</button>}
         </>
     )
 }
