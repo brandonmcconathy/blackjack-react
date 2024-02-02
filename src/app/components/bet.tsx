@@ -53,6 +53,8 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
             if (name == 'positive') {
                 if (balance - bet - value < 0) {
                     setValid(false)
+                } else {
+                    setValid(true)
                 }
             }  
         }
