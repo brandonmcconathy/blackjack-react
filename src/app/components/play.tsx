@@ -7,11 +7,11 @@ export default function Play() {
   const contextBet:any = useContext(BetContext)
   const contextBalance:any = useContext(BalanceContext)
   const { bet } = contextBet
-  const { balence } = contextBalance
+  const { balance } = contextBalance
 
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
-      <h1>{balence}</h1>
+      <h1>{balance}</h1>
       <h1>Dealer</h1>
       <CardDisplay cards={['A', 'Q']} />
       <CardDisplay cards={['10', '4']} />
