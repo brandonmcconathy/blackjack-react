@@ -1,4 +1,4 @@
-import { useState, useContext } from "react"
+import { useState, useContext, useEffect } from "react"
 import { StageContext, BetContext, BalanceContext } from "../../../lib/context"
 
 export default function Bet() {
@@ -48,11 +48,21 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
 
     const [ valid, setValid ] = useState(true)
 
+    useEffect(() =>{
+        const checkValid = () => {
+            if (name == 'positive') {
+                if (balance - bet - value < 0) {
+                    setValid(false)
+                }
+            }  
+        }
+        checkValid()
+    },[bet])
+
     const handleBet = () => {
         if (name == 'positive') {
             setBet((prevBet:any) => prevBet + value)
             setValidBet(true)
-            checkValid()
         } else {
             setBet((prevBet:any) => prevBet - value)
             if (bet <= value) {
@@ -60,14 +70,6 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
                 setValidBet(false)
             }
         }
-    }
-
-    const checkValid = () => {
-        if (name == 'positive') {
-            if (balance - bet - value < 0) {
-                setValid(false)
-            }
-        }  
     }
 
     return(
