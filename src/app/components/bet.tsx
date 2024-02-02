@@ -27,7 +27,7 @@ export default function Bet() {
     }
 
     const placeBet = () => {
-        setBalance((prevBalence:number) => prevBalence - bet)
+        setBalance((prevBalence:any) => prevBalence - bet)
         setStage('play')
     }
 
