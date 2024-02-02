@@ -27,10 +27,10 @@ export default function Bet() {
             <h2 className="text-xl">{bet}</h2>
             <div className="flex flex-col justify-center items-center text-center gap-5">
                 <div className="flex justify-center items-center gap-5">
-                    {betValues.map((value) => <BetButton value={value} name='positive' setValidBet={setValidBet} bet={bet} setBet={setBet} key={value} />)}
+                    {betValues.map((value) => <BetButton value={Number(value)} name='positive' setValidBet={setValidBet} bet={bet} setBet={setBet} balance={balance} key={value} />)}
                 </div>
                 <div className="flex justify-center items-center gap-5">
-                    {betValues.map((value) => <BetButton value={value} name='negative' setValidBet={setValidBet} bet={bet} setBet={setBet} key={value} />)}
+                    {betValues.map((value) => <BetButton value={Number(value)} name='negative' setValidBet={setValidBet} bet={bet} setBet={setBet} balance={balance} key={value} />)}
                 </div>
             </div>
             {validBet ? 
@@ -42,16 +42,17 @@ export default function Bet() {
     )
 }
 
-function BetButton(props: {value:string, name:string, setValidBet:any, bet:number, setBet:any}) {
+function BetButton(props: {value:number, name:string, setValidBet:any, bet:number, setBet:any, balance:number}) {
 
-    const { value, name, setValidBet, bet, setBet } = props
+    const { value, name, setValidBet, bet, setBet, balance } = props
 
-    const handleBet = (event:any) => {
-        console.log(event.target.name)
-        const value = Number(event.target.value)
-        if (event.target.name == 'positive') {
+    const [ valid, setValid ] = useState(true)
+
+    const handleBet = () => {
+        if (name == 'positive') {
             setBet((prevBet:any) => prevBet + value)
             setValidBet(true)
+            checkValid()
         } else {
             setBet((prevBet:any) => prevBet - value)
             if (bet <= value) {
@@ -61,7 +62,21 @@ function BetButton(props: {value:string, name:string, setValidBet:any, bet:numbe
         }
     }
 
+    const checkValid = () => {
+        if (name == 'positive') {
+            if (balance - bet - value < 0) {
+                setValid(false)
+            }
+        }  
+    }
+
+    checkValid()
+
     return(
-        <button name={name} value={value} className="bg-amber-200 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet}>{value}</button>
+        <>
+        {valid ? 
+            <button name={name} value={value} className="bg-amber-200 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet}>{value}</button> :
+            <button name={name} value={value} className="bg-gray-500 w-16 text-black rounded-full py-5 px-7 box-pop" onClick={handleBet}>{value}</button>}
+        </>
     )
 }
