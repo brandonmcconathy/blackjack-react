@@ -1,6 +1,8 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
+import shuffle from "../../../utils/shuffle"
+import drawCard from "../../../utils/drawcard"
 
 export default function Play() {
 
@@ -8,6 +10,19 @@ export default function Play() {
   const contextBalance:any = useContext(BalanceContext)
   const { bet } = contextBet
   const { balance } = contextBalance
+
+  const [ deckId, setDeckId ] = useState('')
+
+  useEffect(() => {
+    async function shuffle() {
+      const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+      const data = await response.json()
+      setDeckId(data.deck_id)
+    }
+    shuffle()
+  },[])
+
+  console.log(drawCard(deckId))
 
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
