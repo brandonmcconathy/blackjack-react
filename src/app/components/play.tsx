@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
-import shuffle from "../../../utils/shuffle"
 import drawCard from "../../../utils/drawcard"
 
 export default function Play() {
