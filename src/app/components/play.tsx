@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
-import drawCard from "../../../utils/drawcard"
 
 export default function Play() {
 
@@ -21,7 +20,11 @@ export default function Play() {
     shuffle()
   },[])
 
-  console.log(drawCard(deckId))
+  const drawCard = async (deckId:string, cards:any) => {
+    const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+    const data = await response.json()
+    return cards.push(data.cards[0])
+  }
 
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
