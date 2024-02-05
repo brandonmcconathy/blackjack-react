@@ -10,8 +10,8 @@ export default function Play() {
   const { balance } = contextBalance
 
   const [ deckId, setDeckId ] = useState('')
-  const [ player, setPlayer ] = useState([])
-  const [ dealer, setDealer ] = useState([])
+  const [ player, setPlayer ] = useState(new Array())
+  const [ dealer, setDealer ] = useState(new Array())
 
   useEffect(() => {
     async function shuffle() {
@@ -33,6 +33,8 @@ export default function Play() {
     const data = await response.json()
     setDealer((prevCards) => ([...prevCards, data.cards[0]]))
   }
+
+  console.log(player)
 
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
