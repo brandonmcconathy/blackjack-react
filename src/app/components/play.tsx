@@ -10,6 +10,8 @@ export default function Play() {
   const { balance } = contextBalance
 
   const [ deckId, setDeckId ] = useState('')
+  const [ player, setPlayer ] = useState([])
+  const [ dealer, setDealer ] = useState([])
 
   useEffect(() => {
     async function shuffle() {
@@ -20,10 +22,10 @@ export default function Play() {
     shuffle()
   },[])
 
-  const drawCard = async (deckId:string, cards:any) => {
+  const drawCard = async (setCards:any) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    return cards.push(data.cards[0])
+    setCards((prevCards:any) => ([...prevCards, data.cards[0]]))
   }
 
   return(
@@ -33,6 +35,7 @@ export default function Play() {
       <CardDisplay cards={['A', 'Q']} />
       <CardDisplay cards={['10', '4']} />
       <h1>Player</h1>
+      <button onClick={drawCard(setPlayer)} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
   )
 }
