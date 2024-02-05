@@ -22,10 +22,16 @@ export default function Play() {
     shuffle()
   },[])
 
-  const drawCard = async (setCards:any) => {
+  const drawPlayerCard = async () => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setCards((prevCards:any) => ([...prevCards, data.cards[0]]))
+    setPlayer((prevCards) => ([...prevCards, data.cards[0]]))
+  }
+
+  const drawDealerCard = async () => {
+    const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
+    const data = await response.json()
+    setDealer((prevCards) => ([...prevCards, data.cards[0]]))
   }
 
   return(
@@ -35,7 +41,7 @@ export default function Play() {
       <CardDisplay cards={['A', 'Q']} />
       <CardDisplay cards={['10', '4']} />
       <h1>Player</h1>
-      <button onClick={drawCard(setPlayer)} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
+      <button onClick={drawPlayerCard} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
   )
 }
