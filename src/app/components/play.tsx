@@ -33,15 +33,14 @@ export default function Play() {
     const data = await response.json()
     setDealer((prevCards) => ([...prevCards, data.cards[0]]))
   }
-
   console.log(player)
 
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
       <h1>{balance}</h1>
       <h1>Dealer</h1>
-      <CardDisplay cards={['A', 'Q']} />
-      <CardDisplay cards={['10', '4']} />
+      <CardDisplay cards={player} />
+      <CardDisplay cards={dealer} />
       <h1>Player</h1>
       <button onClick={drawPlayerCard} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
