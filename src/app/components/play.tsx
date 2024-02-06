@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
 
@@ -13,12 +13,20 @@ export default function Play() {
   const [ player, setPlayer ] = useState(new Array())
   const [ dealer, setDealer ] = useState(new Array())
 
+  const isMounted = useRef(false)
+
   useEffect(() => {
-    async function shuffle() {
-      const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-      const data = await response.json()
-      setDeckId(data.deck_id)
-      return data.deck_id
+    if (!isMounted.current) {
+      startGame()
+      isMounted.current = true
+  }
+  },[])
+
+  async function shuffle() {
+    const response = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+    const data = await response.json()
+    setDeckId(data.deck_id)
+    return data.deck_id
     }
 
     async function startGame() {
@@ -37,9 +45,6 @@ export default function Play() {
         },2000)
       },2000)
     }
-
-    startGame()
-  },[])
 
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
