@@ -40,10 +40,10 @@ export default function Play() {
             drawPlayerCard(deck_id)
             setTimeout(() => {
               drawDealerCard(deck_id)
-            },2000)
-          },2000)
-        },2000)
-      },2000)
+            },1000)
+          },1000)
+        },1000)
+      },1000)
     }
 
   const drawPlayerCard = async (deckId:string) => {
@@ -71,7 +71,7 @@ export default function Play() {
       <CardDisplay cards={dealer} />
       <CardDisplay cards={player} />
       <h1>Player</h1>
-      <button onClick={handleClick} className="bg-green-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
+      <button onClick={handleClick} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
   )
 }
