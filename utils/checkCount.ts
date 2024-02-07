@@ -5,6 +5,7 @@ export default function checkCount(cards:any[]) {
 
   cards.forEach((card:any) => {
     console.log(card)
+    count += Number(card.value)
   })
   
   return(count)

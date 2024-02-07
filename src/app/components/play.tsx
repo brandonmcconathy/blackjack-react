@@ -11,8 +11,8 @@ export default function Play() {
   const { balance } = contextBalance
 
   const [ deckId, setDeckId ] = useState('')
-  const [ player, setPlayer ] = useState(new Array())
-  const [ dealer, setDealer ] = useState(new Array())
+  const [ player, setPlayer ] = useState({cards: new Array(), count: 0})
+  const [ dealer, setDealer ] = useState({cards: new Array(), count: 0})
 
   const isMounted = useRef(false)
 
@@ -48,20 +48,20 @@ export default function Play() {
   }
 
   const updateCounts = () => {
-    checkCount(player)
-    checkCount(dealer)
+    checkCount(player.cards)
+    checkCount(dealer.cards)
   }
 
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setPlayer((prevCards) => ([...prevCards, data.cards[0]]))
+    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count}))
   }
 
   const drawDealerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setDealer((prevCards) => ([...prevCards, data.cards[0]]))
+    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count}))
     console.log('dealer')
   }
 
@@ -73,8 +73,8 @@ export default function Play() {
     <main className="flex flex-col justify-evenly text-center h-screen">
       <h1>{balance}</h1>
       <h1>Dealer</h1>
-      <CardDisplay cards={dealer} />
-      <CardDisplay cards={player} />
+      <CardDisplay cards={dealer.cards} />
+      <CardDisplay cards={player.cards} />
       <h1>Player</h1>
       <button onClick={handleClick} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
