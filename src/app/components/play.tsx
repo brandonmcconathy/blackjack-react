@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
+import checkCount from "../../../utils/checkCount"
 
 export default function Play() {
 
@@ -29,28 +30,32 @@ export default function Play() {
     return data.deck_id
     }
 
-    async function startGame() {
-      const deck_id = await shuffle()
-      console.log(deck_id)
+  async function startGame() {
+    const deck_id = await shuffle()
+    console.log(deck_id)
+    setTimeout(() => {
+      drawPlayerCard(deck_id)
       setTimeout(() => {
-        drawPlayerCard(deck_id)
+        drawDealerCard(deck_id)
         setTimeout(() => {
-          drawDealerCard(deck_id)
+          drawPlayerCard(deck_id)
           setTimeout(() => {
-            drawPlayerCard(deck_id)
-            setTimeout(() => {
-              drawDealerCard(deck_id)
-            },1000)
+            drawDealerCard(deck_id)
           },1000)
         },1000)
       },1000)
-    }
+    },1000)
+  }
+
+  const updateCounts = () => {
+    checkCount(player)
+    checkCount(dealer)
+  }
 
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
     setPlayer((prevCards) => ([...prevCards, data.cards[0]]))
-    console.log('player')
   }
 
   const drawDealerCard = async (deckId:string) => {
