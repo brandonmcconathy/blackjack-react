@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
-import checkCount from "../../../utils/checkCount"
 
 export default function Play() {
 
@@ -32,7 +31,6 @@ export default function Play() {
 
   async function startGame() {
     const deck_id = await shuffle()
-    console.log(deck_id)
     setTimeout(() => {
       drawPlayerCard(deck_id)
       setTimeout(() => {
@@ -47,22 +45,27 @@ export default function Play() {
     },1000)
   }
 
-  const updateCounts = () => {
-    checkCount(player.cards)
-    checkCount(dealer.cards)
+  const updateCount = (value:string) => {
+    console.log('here')
+    if (value == 'KING' || value == 'QUEEN' || value == 'JACK') {
+      return(10)
+    } else if (value == 'ACE') {
+      return(11)
+    } else {
+      return(Number(value))
+    }
   }
 
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count}))
+    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value)}))
   }
 
   const drawDealerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count}))
-    console.log('dealer')
+    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value)}))
   }
 
   const handleClick = () => {
@@ -72,10 +75,10 @@ export default function Play() {
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
       <h1>{balance}</h1>
-      <h1>Dealer</h1>
+      <h1>{dealer.count}</h1>
       <CardDisplay cards={dealer.cards} />
       <CardDisplay cards={player.cards} />
-      <h1>Player</h1>
+      <h1>{player.count}</h1>
       <button onClick={handleClick} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
   )
