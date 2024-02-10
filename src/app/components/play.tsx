@@ -45,11 +45,14 @@ export default function Play() {
     },1000)
   }
 
-  const updateCount = (value:string) => {
+  const updateCount = (value:string, currCount:number) => {
     console.log('here')
     if (value == 'KING' || value == 'QUEEN' || value == 'JACK') {
       return(10)
     } else if (value == 'ACE') {
+      if ((currCount + 11) > 21) {
+        return(1)
+      }
       return(11)
     } else {
       return(Number(value))
@@ -59,13 +62,13 @@ export default function Play() {
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value)}))
+    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count)}))
   }
 
   const drawDealerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value)}))
+    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count)}))
   }
 
   const handleClick = () => {
