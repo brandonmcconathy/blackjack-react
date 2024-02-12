@@ -10,8 +10,8 @@ export default function Play() {
   const { balance } = contextBalance
 
   const [ deckId, setDeckId ] = useState('')
-  const [ player, setPlayer ] = useState({cards: new Array(), count: 0})
-  const [ dealer, setDealer ] = useState({cards: new Array(), count: 0})
+  const [ player, setPlayer ] = useState({cards: new Array(), count: 0, aces:0})
+  const [ dealer, setDealer ] = useState({cards: new Array(), count: 0, aces:0})
 
   const isMounted = useRef(false)
 
@@ -62,13 +62,21 @@ export default function Play() {
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count)}))
+    if (data.cards[0].value == 'ACE') {
+      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces++}))
+    } else {
+      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces}))
+    }
   }
 
   const drawDealerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count)}))
+    if (data.cards[0].value == 'ACE') {
+      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces++}))
+    } else {
+      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces}))
+    }
   }
 
   const handleClick = () => {
