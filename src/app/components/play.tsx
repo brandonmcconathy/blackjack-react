@@ -45,8 +45,11 @@ export default function Play() {
     },1000)
   }
 
-  const updateCount = (value:string, currCount:number) => {
+  const updateCount = (value:string, currCount:number, currAces:number) => {
     console.log('here')
+
+    let newCount = 0
+
     if (value == 'KING' || value == 'QUEEN' || value == 'JACK') {
       return(10)
     } else if (value == 'ACE') {
@@ -63,9 +66,9 @@ export default function Play() {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
     if (data.cards[0].value == 'ACE') {
-      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces++}))
+      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces++}))
     } else {
-      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces}))
+      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces}))
     }
   }
 
@@ -73,9 +76,9 @@ export default function Play() {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
     if (data.cards[0].value == 'ACE') {
-      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces++}))
+      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces++}))
     } else {
-      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count), aces: prevCards.aces}))
+      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces}))
     }
   }
 
