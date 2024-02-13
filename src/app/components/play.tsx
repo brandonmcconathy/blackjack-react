@@ -12,8 +12,8 @@ export default function Play() {
   const { balance } = contextBalance
 
   const [ deckId, setDeckId ] = useState('')
-  const [ player, setPlayer ] = useState({cards: new Array(), score: 0, aces:0})
-  const [ dealer, setDealer ] = useState({cards: new Array(), score: 0, aces:0})
+  const [ player, setPlayer ] = useState({cards: new Array(), score: 0})
+  const [ dealer, setDealer ] = useState({cards: new Array(), score: 0})
 
   const isMounted = useRef(false)
 
@@ -50,21 +50,13 @@ export default function Play() {
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    if (data.cards[0].value == 'ACE') {
-      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces++}))
-    } else {
-      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces}))
-    }
+    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: updateScore([...prevCards.cards, data.cards[0]])}))
   }
 
   const drawDealerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
-    if (data.cards[0].value == 'ACE') {
-      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces++}))
-    } else {
-      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces}))
-    }
+    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: updateScore([...prevCards.cards, data.cards[0]])}))
   }
 
   const handleClick = () => {
