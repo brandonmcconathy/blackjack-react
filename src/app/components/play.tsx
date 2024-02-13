@@ -1,8 +1,6 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
-import drawCard from "../../../util/drawcard"
-import updateScore from "../../../util/updateScore"
 import takeTurn from "../../../util/takeTurn"
 
 export default function Play() {
@@ -46,18 +44,6 @@ export default function Play() {
         },1000)
       },1000)
     },1000)
-  }
-
-  const drawPlayerCard = async (deckId:string) => {
-    const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-    const data = await response.json()
-    setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: updateScore([...prevCards.cards, data.cards[0]])}))
-  }
-
-  const drawDealerCard = async (deckId:string) => {
-    const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-    const data = await response.json()
-    setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: updateScore([...prevCards.cards, data.cards[0]])}))
   }
 
   const handleClick = async () => {
