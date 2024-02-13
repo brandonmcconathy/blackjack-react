@@ -1,6 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
+import drawCard from "../../../util/drawcard"
+import updateScore from "../../../util/updateScore"
 
 export default function Play() {
 
@@ -10,8 +12,8 @@ export default function Play() {
   const { balance } = contextBalance
 
   const [ deckId, setDeckId ] = useState('')
-  const [ player, setPlayer ] = useState({cards: new Array(), count: 0, aces:0})
-  const [ dealer, setDealer ] = useState({cards: new Array(), count: 0, aces:0})
+  const [ player, setPlayer ] = useState({cards: new Array(), score: 0, aces:0})
+  const [ dealer, setDealer ] = useState({cards: new Array(), score: 0, aces:0})
 
   const isMounted = useRef(false)
 
@@ -45,36 +47,13 @@ export default function Play() {
     },1000)
   }
 
-  const updateCount = (value:string, currCount:number, currAces:number) => {
-    console.log('here')
-
-    let newCount = 0
-
-    if (value == 'KING' || value == 'QUEEN' || value == 'JACK') {
-      return(10)
-    } else if (value == 'ACE') {
-      if ((currCount + 11) > 21) {
-        return(1)
-      }
-      return(11)
-    } else {
-      return(Number(value))
-    }
-  }
-
-  const drawCard = async (deckId:string) => {
-    const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
-    const data = await response.json()
-    return(data.cards[0])
-  }
-
   const drawPlayerCard = async (deckId:string) => {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
     if (data.cards[0].value == 'ACE') {
-      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces++}))
+      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces++}))
     } else {
-      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces}))
+      setPlayer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces}))
     }
   }
 
@@ -82,9 +61,9 @@ export default function Play() {
     const response = await fetch(`https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=1`)
     const data = await response.json()
     if (data.cards[0].value == 'ACE') {
-      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces++}))
+      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces++}))
     } else {
-      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], count: prevCards.count += updateCount(data.cards[0].value, prevCards.count, prevCards.aces), aces: prevCards.aces}))
+      setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: prevCards.score += updateScore(data.cards[0].value, prevCards.score, prevCards.aces), aces: prevCards.aces}))
     }
   }
 
@@ -95,10 +74,10 @@ export default function Play() {
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
       <h1>{balance}</h1>
-      <h1>{dealer.count}</h1>
+      <h1>{dealer.score}</h1>
       <CardDisplay cards={dealer.cards} />
       <CardDisplay cards={player.cards} />
-      <h1>{player.count}</h1>
+      <h1>{player.score}</h1>
       <button onClick={handleClick} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
     </main>
   )
