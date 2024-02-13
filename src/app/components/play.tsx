@@ -3,6 +3,7 @@ import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
 import drawCard from "../../../util/drawcard"
 import updateScore from "../../../util/updateScore"
+import takeTurn from "../../../util/takeTurn"
 
 export default function Play() {
 
@@ -33,14 +34,14 @@ export default function Play() {
 
   async function startGame() {
     const deck_id = await shuffle()
-    setTimeout(() => {
-      drawPlayerCard(deck_id)
-      setTimeout(() => {
-        drawDealerCard(deck_id)
-        setTimeout(() => {
-          drawPlayerCard(deck_id)
-          setTimeout(() => {
-            drawDealerCard(deck_id)
+    setTimeout(async () => {
+      setPlayer(await takeTurn(player.cards, deck_id))
+      setTimeout(async () => {
+        setDealer(await takeTurn(player.cards, deck_id))
+        setTimeout(async () => {
+          setPlayer(await takeTurn(player.cards, deck_id))
+          setTimeout(async () => {
+            setDealer(await takeTurn(player.cards, deck_id))
           },1000)
         },1000)
       },1000)
@@ -59,8 +60,8 @@ export default function Play() {
     setDealer((prevCards) => ({cards: [...prevCards.cards, data.cards[0]], score: updateScore([...prevCards.cards, data.cards[0]])}))
   }
 
-  const handleClick = () => {
-    drawPlayerCard(deckId)
+  const handleClick = async () => {
+    setPlayer(await takeTurn(player.cards, deckId))
   }
 
   return(
