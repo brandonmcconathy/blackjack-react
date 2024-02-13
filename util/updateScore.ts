@@ -1,16 +1,23 @@
-export default function updateScore(value:string, currCount:number, currAces:number) {
-    console.log('here')
+export default function updateScore(cards:any[]) {
 
-    let newCount = 0
+    let total = 0
+    let fullAces = 0
 
-    if (value == 'KING' || value == 'QUEEN' || value == 'JACK') {
-        return(10)
-    } else if (value == 'ACE') {
-        if ((currCount + 11) > 21) {
-        return(1)
+    cards.map((card:any) => {
+        if (card.value == 'KING' || card.value == 'QUEEN' || card.value == 'JACK') {
+            total += 10
+        } else if (card.value == 'ACE') {
+            total += 11
+            fullAces++
+        } else {
+            total += Number(card.value)
         }
-        return(11)
-    } else {
-        return(Number(value))
+    })
+
+    while (total > 21 && fullAces > 0) {
+        total -= 10
+        fullAces--
     }
+
+    return(total)
 }
