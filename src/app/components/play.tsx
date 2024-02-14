@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext } from "../../../lib/context"
-import takeTurn from "../../../util/takeTurn"
+import takeTurn from "../../../utils/takeTurn"
 
 export default function Play() {
 
