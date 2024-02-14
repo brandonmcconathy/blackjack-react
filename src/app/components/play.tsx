@@ -35,11 +35,11 @@ export default function Play() {
     setTimeout(async () => {
       setPlayer(await takeTurn(player.cards, deck_id))
       setTimeout(async () => {
-        setDealer(await takeTurn(player.cards, deck_id))
+        setDealer(await takeTurn(dealer.cards, deck_id))
         setTimeout(async () => {
           setPlayer(await takeTurn(player.cards, deck_id))
           setTimeout(async () => {
-            setDealer(await takeTurn(player.cards, deck_id))
+            setDealer(await takeTurn(dealer.cards, deck_id))
           },1000)
         },1000)
       },1000)
