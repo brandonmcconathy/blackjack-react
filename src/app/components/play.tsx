@@ -64,15 +64,22 @@ export default function Play() {
 
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
-      <h1>{balance}</h1>
+      <h1>Balance: {balance}</h1>
+      <h1>Bet: {bet}</h1>
       <h1>{dealer.score}</h1>
       <CardDisplay cards={dealer.cards} />
       <CardDisplay cards={player.cards} />
       <h1>{player.score}</h1>
       <div className="flex items-center justify-center gap-6">
-        <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
-        <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button>
-        <button onClick={handleDouble} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Double</button>
+        {buttons.hit ?
+        <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button> : 
+        <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Hit</button>}
+        {buttons.stand ?
+        <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button> :
+        <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Stand</button>}
+        {buttons.double ?
+        <button onClick={handleDouble} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Double</button> :
+        <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Double</button>}
       </div>
     </main>
   )
