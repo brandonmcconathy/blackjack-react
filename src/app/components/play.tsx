@@ -1,14 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
-import { BetContext, BalanceContext } from "../../../lib/context"
+import { BetContext, BalanceContext, StageContext } from "../../../lib/context"
 import takeTurn from "../../../utils/takeTurn"
 
 export default function Play() {
 
   const contextBet:any = useContext(BetContext)
   const contextBalance:any = useContext(BalanceContext)
+  const contextStage:any = useContext(StageContext)
   const { bet } = contextBet
   const { balance } = contextBalance
+  const {stage, setStage} = contextStage
 
   const [ deckId, setDeckId ] = useState('')
   const [ player, setPlayer ] = useState({cards: new Array(), score: 0})
@@ -46,8 +48,12 @@ export default function Play() {
     },1000)
   }
 
-  const handleClick = async () => {
+  const handleBet = async () => {
     setPlayer(await takeTurn(player.cards, deckId))
+  }
+
+  const handleStand = () => {
+    setStage('again')
   }
 
   return(
@@ -57,7 +63,11 @@ export default function Play() {
       <CardDisplay cards={dealer.cards} />
       <CardDisplay cards={player.cards} />
       <h1>{player.score}</h1>
-      <button onClick={handleClick} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
+      <div className="flex items-center justify-center gap-6">
+        <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
+        <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button>
+      </div>
+      
     </main>
   )
 }
