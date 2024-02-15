@@ -8,13 +8,14 @@ export default function Play() {
   const contextBet:any = useContext(BetContext)
   const contextBalance:any = useContext(BalanceContext)
   const contextStage:any = useContext(StageContext)
-  const { bet } = contextBet
+  const { bet, setBet } = contextBet
   const { balance } = contextBalance
   const {stage, setStage} = contextStage
 
   const [ deckId, setDeckId ] = useState('')
   const [ player, setPlayer ] = useState({cards: new Array(), score: 0})
   const [ dealer, setDealer ] = useState({cards: new Array(), score: 0})
+  const [ buttons, setButtons ] = useState({hit: false, stand: false, double: false})
 
   const isMounted = useRef(false)
 
@@ -56,6 +57,10 @@ export default function Play() {
     setStage('again')
   }
 
+  const handleDouble = () => {
+
+  }
+
   return(
     <main className="flex flex-col justify-evenly text-center h-screen">
       <h1>{balance}</h1>
@@ -66,8 +71,8 @@ export default function Play() {
       <div className="flex items-center justify-center gap-6">
         <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
         <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button>
+        <button onClick={handleDouble} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button>
       </div>
-      
     </main>
   )
 }
