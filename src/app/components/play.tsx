@@ -9,7 +9,7 @@ export default function Play() {
   const contextBalance:any = useContext(BalanceContext)
   const contextStage:any = useContext(StageContext)
   const { bet, setBet } = contextBet
-  const { balance } = contextBalance
+  const { balance, setBalance } = contextBalance
   const {stage, setStage} = contextStage
 
   const [ deckId, setDeckId ] = useState('')
@@ -58,8 +58,11 @@ export default function Play() {
     setStage('again')
   }
 
-  const handleDouble = () => {
-
+  const handleDouble = async () => {
+    setBalance((prevBalance:number) => prevBalance - bet)
+    setBet((prevBet:number) => prevBet * 2)
+    setButtons({hit: false, stand: false, double: false})
+    setPlayer(await takeTurn(player.cards, deckId))
   }
 
   return(
@@ -73,13 +76,13 @@ export default function Play() {
       <div className="flex items-center justify-center gap-6">
         {buttons.hit ?
         <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button> : 
-        <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Hit</button>}
+        <button className="bg-gray-500 text-slate-800 px-4 py-1 rounded-xl text-2xl font-semibold box-pop transition duration-300" disabled>Hit</button>}
         {buttons.stand ?
         <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button> :
-        <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Stand</button>}
+        <button className="bg-gray-500 text-slate-800 px-4 py-1 rounded-xl text-2xl font-semibold box-pop transition duration-300" disabled>Stand</button>}
         {buttons.double ?
         <button onClick={handleDouble} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Double</button> :
-        <button className="bg-gray-500 text-slate-800 px-3 py-1 rounded-xl text-xl font-semibold box-pop transition duration-300" disabled>Double</button>}
+        <button className="bg-gray-500 text-slate-800 px-4 py-1 rounded-xl text-2xl font-semibold box-pop transition duration-300" disabled>Double</button>}
       </div>
     </main>
   )
