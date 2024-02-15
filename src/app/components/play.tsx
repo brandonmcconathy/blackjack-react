@@ -43,6 +43,7 @@ export default function Play() {
           setPlayer(await takeTurn(player.cards, deck_id))
           setTimeout(async () => {
             setDealer(await takeTurn(dealer.cards, deck_id))
+            setButtons({hit: true, stand: true, double: (balance >= bet)})
           },1000)
         },1000)
       },1000)
@@ -71,7 +72,7 @@ export default function Play() {
       <div className="flex items-center justify-center gap-6">
         <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button>
         <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button>
-        <button onClick={handleDouble} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button>
+        <button onClick={handleDouble} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Double</button>
       </div>
     </main>
   )
