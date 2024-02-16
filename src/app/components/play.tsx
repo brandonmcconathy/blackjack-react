@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext, StageContext } from "../../../lib/context"
 import takeTurn from "../../../utils/takeTurn"
+import updateScore from "../../../utils/updateScore"
 
 export default function Play() {
 
@@ -69,7 +70,11 @@ export default function Play() {
   }
 
   const dealerTurn = async () => {
-    setDealer(await takeTurn(dealer.cards, deckId))
+    let tempScore = dealer.score
+    while (tempScore < 17) {
+      setDealer(await takeTurn(dealer.cards, deckId))
+      tempScore = updateScore(dealer.cards)
+    }
   }
 
   return(
