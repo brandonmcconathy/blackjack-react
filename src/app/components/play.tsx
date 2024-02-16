@@ -50,8 +50,9 @@ export default function Play() {
     },1000)
   }
 
-  const handleBet = async () => {
+  const handleHit = async () => {
     setPlayer(await takeTurn(player.cards, deckId))
+    setButtons({hit: true, stand: true, double: false})
   }
 
   const handleStand = () => {
@@ -75,7 +76,7 @@ export default function Play() {
       <h1>{player.score}</h1>
       <div className="flex items-center justify-center gap-6">
         {buttons.hit ?
-        <button onClick={handleBet} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button> : 
+        <button onClick={handleHit} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button> : 
         <button className="bg-gray-500 text-slate-800 px-4 py-1 rounded-xl text-2xl font-semibold box-pop transition duration-300" disabled>Hit</button>}
         {buttons.stand ?
         <button onClick={handleStand} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Stand</button> :
