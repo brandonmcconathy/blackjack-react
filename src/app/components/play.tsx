@@ -56,7 +56,8 @@ export default function Play() {
   }
 
   const handleStand = () => {
-    setStage('again')
+    setButtons({hit: false, stand: false, double: false})
+    dealerTurn()
   }
 
   const handleDouble = async () => {
@@ -64,6 +65,11 @@ export default function Play() {
     setBet((prevBet:number) => prevBet * 2)
     setButtons({hit: false, stand: false, double: false})
     setPlayer(await takeTurn(player.cards, deckId))
+    dealerTurn()
+  }
+
+  const dealerTurn = async () => {
+    setDealer(await takeTurn(dealer.cards, deckId))
   }
 
   return(
