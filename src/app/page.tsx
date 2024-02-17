@@ -6,6 +6,9 @@ import Start from "./components/start"
 import Bet from "./components/bet"
 import Play from "./components/play"
 import PlayAgain from "./components/playagain"
+import Win from "./components/win"
+import Lose from "./components/lose"
+import Push from "./components/push"
 
 export default function Home() {
 
@@ -21,5 +24,11 @@ export default function Home() {
       return(<Play />)
     case 'again':
       return(<PlayAgain />)
+    case 'win':
+      return(<Win />)
+    case 'lose':
+      return(<Lose />)
+    case 'push':
+      return(<Push />)
   } 
 }
