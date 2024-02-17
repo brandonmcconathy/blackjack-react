@@ -1,5 +1,5 @@
 import drawCard from "./drawcard"
-import updateScore from "./updateScore"
+import updateScore from "./updatescore"
 
 export default async function takeTurn(cards:any[], deckId:string) {
 

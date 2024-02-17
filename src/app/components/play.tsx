@@ -1,8 +1,8 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext, StageContext } from "../../../lib/context"
-import takeTurn from "../../../utils/takeTurn"
-import updateScore from "../../../utils/updateScore"
+import takeTurn from "../../../utils/taketurn"
+import updateScore from "../../../utils/updatescore"
 
 export default function Play() {
 
