@@ -78,8 +78,7 @@ export default function Play() {
       tempScore = updateScore(dealer.cards)
     }
     const nextStage = compareScores(tempScore, player.score)
-    console.log(nextStage)
-    setStage(nextStage)
+    setTimeout(() => setStage(nextStage), 1000)
   }
 
   return(
