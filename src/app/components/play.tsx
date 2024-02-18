@@ -3,6 +3,7 @@ import CardDisplay from "./carddisplay"
 import { BetContext, BalanceContext, StageContext } from "../../../lib/context"
 import takeTurn from "../../../utils/taketurn"
 import updateScore from "../../../utils/updatescore"
+import compareScores from "../../../utils/comparescores"
 
 export default function Play() {
 
@@ -36,6 +37,7 @@ export default function Play() {
 
   async function startGame() {
     const deck_id = await shuffle()
+    const interval = 300
     setTimeout(async () => {
       setPlayer(await takeTurn(player.cards, deck_id))
       setTimeout(async () => {
@@ -45,10 +47,10 @@ export default function Play() {
           setTimeout(async () => {
             setDealer(await takeTurn(dealer.cards, deck_id))
             setButtons({hit: true, stand: true, double: (balance >= bet)})
-          },1000)
-        },1000)
-      },1000)
-    },1000)
+          },interval)
+        },interval)
+      },interval)
+    },interval)
   }
 
   const handleHit = async () => {
@@ -75,6 +77,9 @@ export default function Play() {
       setDealer(await takeTurn(dealer.cards, deckId))
       tempScore = updateScore(dealer.cards)
     }
+    const nextStage = compareScores(tempScore, player.score)
+    console.log(nextStage)
+    setStage(nextStage)
   }
 
   return(
