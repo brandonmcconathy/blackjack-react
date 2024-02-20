@@ -1,10 +1,14 @@
-import { BalanceContext } from "../../../lib/context"
+import { BalanceContext, BetContext } from "../../../lib/context"
 import { useContext } from "react"
 
 export default function Lose() {
 
   const contextBalance:any = useContext(BalanceContext)
-  const { balance, setBalance } = contextBalance
+  const contextBet:any = useContext(BetContext)
+  const { balance } = contextBalance
+  const { setBet } = contextBet
+
+  setBet(0)
 
   return(
     <section>
