@@ -16,6 +16,7 @@ export default function Push() {
     if (!isMounted.current) {
       setBalance((prevBalance:number) => prevBalance + bet)
       setBet(0)
+      isMounted.current = true
     }
   },[])
 

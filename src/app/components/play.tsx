@@ -46,11 +46,23 @@ export default function Play() {
           setPlayer(await takeTurn(player.cards, deck_id))
           setTimeout(async () => {
             setDealer(await takeTurn(dealer.cards, deck_id))
-            setButtons({hit: true, stand: true, double: (balance >= bet)})
+            checkBlackjack()
           },interval)
         },interval)
       },interval)
     },interval)
+  }
+
+  const checkBlackjack = () => {
+    if (updateScore(player.cards) == 21) {
+      if (updateScore(dealer.cards) != 21) {
+        setTimeout(() => setStage('blackjack'), 1000)
+      } else {
+        setTimeout(() => setStage('push'), 1000)
+      }
+    } else {
+      setButtons({hit: true, stand: true, double: (balance >= bet)})
+    }
   }
 
   const handleHit = async () => {
