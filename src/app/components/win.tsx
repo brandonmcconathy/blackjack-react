@@ -1,5 +1,5 @@
 import { BetContext, BalanceContext, StageContext } from "../../../lib/context"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect, useState, useRef } from "react"
 
 export default function Win() {
 
@@ -13,11 +13,16 @@ export default function Win() {
   const [ betAmount, setBetAmount ] = useState(0)
   const [ balanceAmount, setBalanceAmount ] = useState(0)
 
+  const isMounted = useRef(false)
+
   useEffect(() => {
-    setBetAmount(bet)
-    setBalanceAmount(balance)
-    setBet(0)
-    setBalance((prevBalance:number) => prevBalance + bet)
+    if (!isMounted.current) {
+      setBetAmount(bet)
+      setBalanceAmount(balance)
+      setBalance((prevBalance:number) => prevBalance + 2 * bet)
+      setBet(0)
+      isMounted.current = true
+    }
   },[])
 
   return(

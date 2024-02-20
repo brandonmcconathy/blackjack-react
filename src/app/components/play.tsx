@@ -25,7 +25,7 @@ export default function Play() {
     if (!isMounted.current) {
       startGame()
       isMounted.current = true
-  }
+    }
   },[])
 
   async function shuffle() {

@@ -2,7 +2,6 @@ export default function updateScore(cards:any[]) {
 
     let total = 0
     let fullAces = 0
-    console.log(cards)
 
     cards.map((card:any) => {
         if (card.value == 'KING' || card.value == 'QUEEN' || card.value == 'JACK') {
