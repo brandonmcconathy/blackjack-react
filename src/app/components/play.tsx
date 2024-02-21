@@ -65,9 +65,19 @@ export default function Play() {
     }
   }
 
+  const checkBust = () => {
+    if (updateScore(player.cards) > 21) {
+      setButtons({hit: false, stand: false, double: false})
+      setTimeout(() => setStage('lose'), 1000)
+    } else {
+      setButtons({hit: true, stand: true, double: false})
+    }
+  }
+
   const handleHit = async () => {
     setPlayer(await takeTurn(player.cards, deckId))
     setButtons({hit: true, stand: true, double: false})
+    checkBust()
   }
 
   const handleStand = () => {
