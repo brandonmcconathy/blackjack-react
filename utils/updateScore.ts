@@ -4,13 +4,15 @@ export default function updateScore(cards:any[]) {
     let fullAces = 0
 
     cards.map((card:any) => {
-        if (card.value == 'KING' || card.value == 'QUEEN' || card.value == 'JACK') {
-            total += 10
-        } else if (card.value == 'ACE') {
-            total += 11
-            fullAces++
-        } else {
-            total += Number(card.value)
+        if (!card.down) {
+            if (card.value == 'KING' || card.value == 'QUEEN' || card.value == 'JACK') {
+                total += 10
+            } else if (card.value == 'ACE') {
+                total += 11
+                fullAces++
+            } else {
+                total += Number(card.value)
+            }
         }
     })
 
