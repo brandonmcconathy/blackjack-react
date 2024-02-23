@@ -55,6 +55,9 @@ export default function Play() {
 
   const checkBlackjack = () => {
     if (updateScore(player.cards) == 21) {
+      let tempDealer = dealer
+      tempDealer.cards[1].down = false
+      setDealer(tempDealer)
       if (updateScore(dealer.cards) != 21) {
         setTimeout(() => setStage('blackjack'), 1000)
       } else {
@@ -94,6 +97,9 @@ export default function Play() {
   }
 
   const dealerTurn = async () => {
+    let tempDealer = dealer
+    tempDealer.cards[1].down = false
+    setDealer(tempDealer)
     let tempScore = dealer.score
     while (tempScore < 17) {
       setDealer(await takeTurn(dealer.cards, deckId, false))
