@@ -39,13 +39,13 @@ export default function Play() {
     const deck_id = await shuffle()
     const interval = 300
     setTimeout(async () => {
-      setPlayer(await takeTurn(player.cards, deck_id))
+      setPlayer(await takeTurn(player.cards, deck_id, false))
       setTimeout(async () => {
-        setDealer(await takeTurn(dealer.cards, deck_id))
+        setDealer(await takeTurn(dealer.cards, deck_id, false))
         setTimeout(async () => {
-          setPlayer(await takeTurn(player.cards, deck_id))
+          setPlayer(await takeTurn(player.cards, deck_id, false))
           setTimeout(async () => {
-            setDealer(await takeTurn(dealer.cards, deck_id))
+            setDealer(await takeTurn(dealer.cards, deck_id, true))
             checkBlackjack()
           },interval)
         },interval)
@@ -75,7 +75,7 @@ export default function Play() {
   }
 
   const handleHit = async () => {
-    setPlayer(await takeTurn(player.cards, deckId))
+    setPlayer(await takeTurn(player.cards, deckId, false))
     setButtons({hit: true, stand: true, double: false})
     checkBust()
   }
@@ -89,14 +89,14 @@ export default function Play() {
     setBalance((prevBalance:number) => prevBalance - bet)
     setBet((prevBet:number) => prevBet * 2)
     setButtons({hit: false, stand: false, double: false})
-    setPlayer(await takeTurn(player.cards, deckId))
+    setPlayer(await takeTurn(player.cards, deckId, false))
     dealerTurn()
   }
 
   const dealerTurn = async () => {
     let tempScore = dealer.score
     while (tempScore < 17) {
-      setDealer(await takeTurn(dealer.cards, deckId))
+      setDealer(await takeTurn(dealer.cards, deckId, false))
       tempScore = updateScore(dealer.cards)
     }
     const nextStage = compareScores(tempScore, player.score)
