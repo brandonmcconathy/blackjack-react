@@ -37,7 +37,7 @@ export default function Play() {
 
   async function startGame() {
     const deck_id = await shuffle()
-    const interval = 300
+    const interval = 1000
     setTimeout(async () => {
       setPlayer(await takeTurn(player.cards, deck_id, false))
       setTimeout(async () => {
