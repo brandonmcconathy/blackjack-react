@@ -99,13 +99,13 @@ export default function Play() {
   const dealerTurn = async () => {
     let tempDealer = dealer
     tempDealer.cards[1].down = false
+    tempDealer.score = updateScore(tempDealer.cards)
     setDealer(tempDealer)
-    let tempScore = updateScore(tempDealer.cards)
-    while (tempScore < 17) {
+    while (tempDealer.score < 17) {
       setDealer(await takeTurn(dealer.cards, deckId, false))
-      tempScore = updateScore(dealer.cards)
+      tempDealer.score = updateScore(dealer.cards)
     }
-    const nextStage = compareScores(tempScore, player.score)
+    const nextStage = compareScores(tempDealer.score, player.score)
     setTimeout(() => setStage(nextStage), 1000)
   }
 
