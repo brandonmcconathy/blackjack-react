@@ -100,7 +100,7 @@ export default function Play() {
     let tempDealer = dealer
     tempDealer.cards[1].down = false
     setDealer(tempDealer)
-    let tempScore = dealer.score
+    let tempScore = updateScore(tempDealer.cards)
     while (tempScore < 17) {
       setDealer(await takeTurn(dealer.cards, deckId, false))
       tempScore = updateScore(dealer.cards)
