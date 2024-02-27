@@ -64,7 +64,14 @@ export default function Play() {
         setTimeout(() => setStage('push'), 1000)
       }
     } else {
-      setButtons({hit: true, stand: true, double: (balance >= bet)})
+      if (updateScore(dealer.cards) == 21) {
+        let tempDealer = dealer
+        tempDealer.cards[1].down = false
+        setDealer(tempDealer)
+        setTimeout(() => setStage('lose'), 1000)
+      } else {
+        setButtons({hit: true, stand: true, double: (balance >= bet)})
+      }
     }
   }
 
