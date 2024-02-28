@@ -44,7 +44,7 @@ function BetButton(props: {value:number, name:string, setValidBet:any, bet:numbe
 
     const { value, name, setValidBet, bet, setBet, balance } = props
 
-    const [ valid, setValid ] = useState(true)
+    const [ valid, setValid ] = useState(false)
 
     useEffect(() =>{
         const checkValid = () => {
