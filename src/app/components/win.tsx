@@ -28,7 +28,7 @@ export default function Win() {
   return(
     <section className="flex flex-col items-center justify-center mt-5 gap-6">
       <h1 className="text-3xl">YOU WIN</h1>
-      <h2 className="text-xl">+ {betAmount}</h2>
+      <h2 className="text-2xl text-amber-300">+ {betAmount}</h2>
       <h3 className="text-xl">Balance: {balance}</h3>
       <div className="flex gap-6">
         <button onClick={function() {setStage('bet')}} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Play Again</button>
