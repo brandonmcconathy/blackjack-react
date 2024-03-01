@@ -78,7 +78,11 @@ export default function Play() {
   const checkBust = () => {
     if (updateScore(player.cards) > 21) {
       setButtons({hit: false, stand: false, double: false})
-      setTimeout(() => setStage('lose'), 1000)
+      let tempDealer = dealer
+      tempDealer.cards[1].down = false
+      tempDealer.score = updateScore(tempDealer.cards)
+      setDealer(tempDealer)
+      setTimeout(() => setStage('lose'), 1500)
     } else {
       setButtons({hit: true, stand: true, double: false})
     }
