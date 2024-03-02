@@ -128,7 +128,7 @@ export default function Play() {
         <CardDisplay cards={dealer.cards} />
         <CardDisplay cards={player.cards} />
         <h1 className="-mt-6 mb-10">{player.score}</h1>
-        <h1 className="mb-12 text-xl">Bet: {bet}</h1>
+        <h1 className="mb-18 text-xl">Bet: {bet}</h1>
         <div className="flex items-center justify-center gap-6">
           {buttons.hit ?
           <button onClick={handleHit} className="bg-green-500 text-slate-800 px-4 py-1 rounded-xl text-2xl self-center font-semibold box-pop hover:bg-green-300 transition duration-300">Hit</button> : 
