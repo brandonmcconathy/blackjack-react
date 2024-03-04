@@ -104,7 +104,15 @@ export default function Play() {
     setBet((prevBet:number) => prevBet * 2)
     setButtons({hit: false, stand: false, double: false})
     setPlayer(await takeTurn(player.cards, deckId, false))
-    dealerTurn()
+    if (updateScore(player.cards) > 21) {
+      let tempDealer = dealer
+      tempDealer.cards[1].down = false
+      tempDealer.score = updateScore(tempDealer.cards)
+      setDealer(tempDealer)
+      setTimeout(() => setStage('lose'), 1500)
+    } else {
+      dealerTurn()
+    }
   }
 
   const dealerTurn = async () => {
